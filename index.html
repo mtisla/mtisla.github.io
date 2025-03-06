@@ -1,4 +1,4 @@
-k<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,13 +38,18 @@ k<!DOCTYPE html>
             color: white;
             font-size: 14px;
         }
-        img {
-            max-width: 100%;
+        /* Improved poster preview */
+        .poster-container {
+            display: flex;
+            justify-content: center;
+        }
+        .poster-preview {
+            max-width: 90%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            width: 280px; /* Small preview size */
+            width: 320px; /* Larger preview for better mobile experience */
         }
         /* Modal styles */
         .modal {
@@ -59,18 +64,19 @@ k<!DOCTYPE html>
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 10px;
         }
         .modal-content {
-            width: 80%;
+            width: 90%;
             max-width: 900px;
-            height: 80%;
-            max-height: 90%;
+            height: 90%;
+            max-height: 95%;
             border: none;
         }
         .close {
             position: absolute;
-            top: 15px;
-            right: 25px;
+            top: 10px;
+            right: 15px;
             color: white;
             font-size: 35px;
             cursor: pointer;
@@ -84,17 +90,18 @@ k<!DOCTYPE html>
             section {
                 padding: 20px;
             }
-            img {
-                width: 200px;
+            .poster-preview {
+                width: 100%; /* Full width on smaller screens */
+                max-width: 280px;
             }
             .modal-content {
-                width: 90%;
-                height: 70%;
+                width: 95%;
+                height: 85%;
             }
             .close {
                 font-size: 30px;
-                top: 10px;
-                right: 15px;
+                top: 5px;
+                right: 10px;
             }
         }
     </style>
@@ -127,7 +134,9 @@ k<!DOCTYPE html>
     <h2>AABA 2025 Poster</h2>
     <p>Tap the preview to view the full poster.</p>
     <!-- Poster Preview Image -->
-    <img id="posterPreview" src="poster-thumbnail.jpg" alt="AABA 2025 Poster">
+    <div class="poster-container">
+        <img id="posterPreview" class="poster-preview" src="poster-thumbnail.jpg" alt="AABA 2025 Poster">
+    </div>
     
     <!-- Modal for Full Poster (No Download Option) -->
     <div id="posterModal" class="modal">
