@@ -47,14 +47,57 @@
             list-style-type: none;
             padding: 0;
         }
-        /* Project description placeholder */
+        /* Collapsible project descriptions */
         .project-description {
-            margin-top: 15px;
+            display: none;
+            margin-top: 10px;
             padding: 10px;
             background-color: #f9f9f9;
+            border-left: 4px solid #007BFF;
             border-radius: 5px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-            display: none; /* Initially hidden */
+        }
+        /* Smaller poster preview */
+        .poster-container {
+            display: flex;
+            justify-content: center;
+        }
+        .poster-preview {
+            max-width: 60%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            width: 200px; /* Smaller preview */
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Ensures modal is hidden initially */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .modal-content {
+            width: 80%;
+            max-width: 900px;
+            height: 80%;
+            max-height: 90%;
+            border: none;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -74,15 +117,21 @@
 
 <section>
     <h2>Projects</h2>
-    <p>Click on a project to see its description:</p>
+    <p>Click on a project to expand its description:</p>
     <ul class="project-list">
-        <li><a onclick="showProject('project1')">Project 1: Detecting Recent Selection on Polygenic Traits</a></li>
-        <li><a onclick="showProject('project2')">Project 2: Refining Denisovan Ancestry in East Asian Populations</a></li>
-        <li><a onclick="showProject('project3')">Project 3: Exploring Phenotypic Effects of Archaic Introgression in East Asians</a></li>
+        <li>
+            <a onclick="toggleProject('project1')">Project 1: Detecting Recent Selection on Polygenic Traits</a>
+            <div id="project1" class="project-description">This project focuses on detecting recent selection on polygenic traits using genomic data from large biobank datasets.</div>
+        </li>
+        <li>
+            <a onclick="toggleProject('project2')">Project 2: Refining Denisovan Ancestry in East Asian Populations</a>
+            <div id="project2" class="project-description">This study refines Denisovan ancestry detection in East Asian populations using improved statistical genetics methods.</div>
+        </li>
+        <li>
+            <a onclick="toggleProject('project3')">Project 3: Exploring Phenotypic Effects of Archaic Introgression in East Asians</a>
+            <div id="project3" class="project-description">This research explores the phenotypic effects of archaic introgression and its role in human adaptation.</div>
+        </li>
     </ul>
-
-    <!-- Project Description Placeholder -->
-    <div id="project-description" class="project-description"></div>
 </section>
 
 <section>
@@ -112,17 +161,14 @@
 </footer>
 
 <script>
-    // Function to show project descriptions
-    function showProject(projectId) {
-        var descriptions = {
-            "project1": "This project focuses on detecting recent selection on polygenic traits using genomic data from large biobank datasets.",
-            "project2": "This study refines Denisovan ancestry detection in East Asian populations using improved statistical genetics methods.",
-            "project3": "This research explores the phenotypic effects of archaic introgression and its role in human adaptation."
-        };
-
-        var descriptionDiv = document.getElementById("project-description");
-        descriptionDiv.innerHTML = descriptions[projectId];
-        descriptionDiv.style.display = "block";
+    // Function to toggle project descriptions
+    function toggleProject(projectId) {
+        var projectDiv = document.getElementById(projectId);
+        if (projectDiv.style.display === "block") {
+            projectDiv.style.display = "none";
+        } else {
+            projectDiv.style.display = "block";
+        }
     }
 
     // Modal functionality for poster preview
