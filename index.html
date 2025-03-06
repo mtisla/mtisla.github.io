@@ -30,6 +30,10 @@
         a {
             color: #007BFF;
             text-decoration: none;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
         }
         footer {
             margin-top: 20px;
@@ -38,70 +42,19 @@
             color: white;
             font-size: 14px;
         }
-        /* Improved poster preview */
-        .poster-container {
-            display: flex;
-            justify-content: center;
+        /* Remove bullet points in project list */
+        .project-list {
+            list-style-type: none;
+            padding: 0;
         }
-        .poster-preview {
-            max-width: 90%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            width: 320px; /* Larger preview for better mobile experience */
-        }
-        /* Modal styles */
-        .modal {
-            display: none; /* Ensures modal is hidden initially */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            align-items: center;
-            justify-content: center;
+        /* Project description placeholder */
+        .project-description {
+            margin-top: 15px;
             padding: 10px;
-        }
-        .modal-content {
-            width: 90%;
-            max-width: 900px;
-            height: 90%;
-            max-height: 95%;
-            border: none;
-        }
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: white;
-            font-size: 35px;
-            cursor: pointer;
-        }
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            header {
-                font-size: 18px;
-                padding: 12px;
-            }
-            section {
-                padding: 20px;
-            }
-            .poster-preview {
-                width: 100%; /* Full width on smaller screens */
-                max-width: 280px;
-            }
-            .modal-content {
-                width: 95%;
-                height: 85%;
-            }
-            .close {
-                font-size: 30px;
-                top: 5px;
-                right: 10px;
-            }
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
         }
     </style>
 </head>
@@ -121,12 +74,15 @@
 
 <section>
     <h2>Projects</h2>
-    <p>Here are some of my research projects:</p>
-    <ul>
-        <li><a href="#">Project 1: Detecting Recent Selection on Polygenic Traits</a></li>
-        <li><a href="#">Project 2: Refining Denisovan Ancestry in East Asian Populations</a></li>
-        <li><a href="#">Project 3: Exploring Phenotypic Effects of Archaic Introgression in East Asians</a></li>
+    <p>Click on a project to see its description:</p>
+    <ul class="project-list">
+        <li><a onclick="showProject('project1')">Project 1: Detecting Recent Selection on Polygenic Traits</a></li>
+        <li><a onclick="showProject('project2')">Project 2: Refining Denisovan Ancestry in East Asian Populations</a></li>
+        <li><a onclick="showProject('project3')">Project 3: Exploring Phenotypic Effects of Archaic Introgression in East Asians</a></li>
     </ul>
+
+    <!-- Project Description Placeholder -->
+    <div id="project-description" class="project-description"></div>
 </section>
 
 <section>
@@ -156,7 +112,20 @@
 </footer>
 
 <script>
-    // Modal functionality
+    // Function to show project descriptions
+    function showProject(projectId) {
+        var descriptions = {
+            "project1": "This project focuses on detecting recent selection on polygenic traits using genomic data from large biobank datasets.",
+            "project2": "This study refines Denisovan ancestry detection in East Asian populations using improved statistical genetics methods.",
+            "project3": "This research explores the phenotypic effects of archaic introgression and its role in human adaptation."
+        };
+
+        var descriptionDiv = document.getElementById("project-description");
+        descriptionDiv.innerHTML = descriptions[projectId];
+        descriptionDiv.style.display = "block";
+    }
+
+    // Modal functionality for poster preview
     document.addEventListener("DOMContentLoaded", function () {
         var modal = document.getElementById("posterModal");
         var img = document.getElementById("posterPreview");
