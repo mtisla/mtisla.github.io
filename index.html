@@ -61,7 +61,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
             align-items: center;
             justify-content: center;
             padding: 10px;
@@ -158,27 +157,32 @@
 
 <script>
     // Modal functionality
-    var modal = document.getElementById("posterModal");
-    var img = document.getElementById("posterPreview");
-    var span = document.getElementsByClassName("close")[0];
-    var iframe = document.getElementById("posterIframe");
+    document.addEventListener("DOMContentLoaded", function () {
+        var modal = document.getElementById("posterModal");
+        var img = document.getElementById("posterPreview");
+        var span = document.getElementsByClassName("close")[0];
+        var iframe = document.getElementById("posterIframe");
 
-    img.onclick = function() {
-        modal.style.display = "flex";
-        iframe.src = "poster.pdf#toolbar=0&navpanes=0&scrollbar=0"; // Loads poster only when clicked
-    }
-
-    span.onclick = function() {
+        // Ensure modal starts hidden
         modal.style.display = "none";
-        iframe.src = ""; // Unloads poster when modal is closed
-    }
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            iframe.src = ""; // Prevents the PDF from staying loaded
+        img.onclick = function () {
+            modal.style.display = "flex";
+            iframe.src = "poster.pdf#toolbar=0&navpanes=0&scrollbar=0"; // Loads poster only when clicked
         }
-    }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+            iframe.src = ""; // Unloads poster when modal is closed
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                iframe.src = ""; // Prevents the PDF from staying loaded
+            }
+        }
+    });
 </script>
 
 </body>
